@@ -22,5 +22,49 @@ public class Arrays {
             
         }
     }
-    
+    public static void maxsubarraysum(int arr[] , int n) {
+        //this is the brute force approach to find the maximum subarray sum
+        int max_sum = Integer.MIN_VALUE;
+        for(int i = 0 ; i < n ; i++) {
+            for(int j = i ; j < n ; j++) {
+                int sum = 0;
+                for(int k = i ; k <= j ; k++) {
+                    sum += arr[k];
+                }
+                max_sum = Math.max(max_sum , sum);
+            }
+        }
+        System.out.println("Maximum Subarray Sum is : " + max_sum);
+    }
+    public static void maxsubarraysum_kadane(int arr[] , int n ) {
+        //this is the kadane's algorithm to find the maximum subarray sum
+        int max_sum = Integer.MIN_VALUE;
+        int current_sum = 0;
+        for(int i = 0 ; i < n ; i++) {
+            current_sum += arr[i];
+            if(current_sum > max_sum) {
+                max_sum = current_sum;
+            }
+            if(current_sum < 0) {
+                current_sum = 0;
+            }
+        }
+        System.out.println("Maximum Subarray Sum using Kadane's Algorithm is : " + max_sum);
+    }
+    public static void maxsubarraysum_prefixsum(int arr[] , int n) {
+        //this is the prefix sum approach to find the maximum subarray sum
+        int max_sum = Integer.MIN_VALUE;
+        int[] prefix_sum = new int[n];
+        prefix_sum[0] = arr[0];
+        for(int i = 1 ; i < n ; i++) {
+            prefix_sum[i] = prefix_sum[i-1] + arr[i];
+        }
+        for(int i = 0 ; i < n ; i++) {
+            for(int j = i ; j < n ; j++) {
+                int sum = prefix_sum[j] - (i > 0 ? prefix_sum[i-1] : 0);
+                max_sum = Math.max(max_sum , sum);
+            }
+        }
+        System.out.println("Maximum Subarray Sum using Prefix Sum is : " + max_sum);
+    }
 }
