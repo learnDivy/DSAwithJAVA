@@ -1,6 +1,7 @@
+package Arrays;
 import java.util.* ;
 
-public class Arrays {
+public class MaxSubarraysum {
     public static void main (String[] args) {
         System.out.println("New Array of Light ");
         try(Scanner Sc = new Scanner (System.in)){
